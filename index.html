@@ -3,9 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <title>My GitHub Page</title>
+  <style>
+    /* Basic styling for demonstration */
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 20px;
+    }
+    .bio {
+      flex: 1;
+      max-width: 60%;
+    }
+    .navigation {
+      flex: 1;
+      max-width: 30%;
+    }
+    .navigation ul {
+      list-style: none;
+      padding: 0;
+    }
+    .navigation li {
+      margin-bottom: 10px;
+    }
+    .navigation a {
+      text-decoration: none;
+      padding: 8px 12px;
+      border: 1px solid #333;
+      border-radius: 5px;
+      display: block;
+      width: fit-content;
+    }
+    .navigation a:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to My GitHub Page!</h1>
-  <p>This is a basic example of a GitHub Pages site.</p>
+  <div class="container">
+    <div class="bio">
+      <h1>Welcome to My GitHub Page!</h1>
+      <p>This is a basic example of a GitHub Pages site. Here's a brief bio: [Your bio goes here]</p>
+    </div>
+    <div class="navigation">
+      <h2>Navigation</h2>
+      <ul>
+        <li><a href="#cv">CV</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#audio">Audio Engineering Projects</a></li>
+        <li><a href="#contact">Contact Information</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- More content or sections can be added here -->
 </body>
 </html>
