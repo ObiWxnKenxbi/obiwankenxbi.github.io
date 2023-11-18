@@ -6,7 +6,6 @@
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
 
 
-
 // sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
@@ -129,6 +128,50 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
+// digital art part
+document.addEventListener('DOMContentLoaded', function() {
+  const digitalArtThumbnails = document.querySelectorAll('.digital-art-thumbnail');
+
+  digitalArtThumbnails.forEach(thumbnail => {
+      thumbnail.addEventListener('click', function() {
+          const fullImageSrc = this.getAttribute('data-full-image');
+          const fullImage = new Image();
+          fullImage.src = fullImageSrc;
+
+          fullImage.onload = function() {
+              // Show the full image in a modal or overlay
+              // For example:
+              const modal = document.createElement('div');
+              modal.classList.add('digital-art-modal');
+              const fullImageView = document.createElement('img');
+              fullImageView.src = fullImageSrc;
+              modal.appendChild(fullImageView);
+              document.body.appendChild(modal);
+
+              // Close modal on click
+              modal.addEventListener('click', function() {
+                  modal.remove();
+              });
+          };
+      });
+  });
+});
+
+
+
+// Open the modal with the clicked image
+function openModal(imageUrl) {
+  const modal = document.getElementById("myModal");
+  const modalImg = document.getElementById("modalImg");
+  modal.style.display = "block";
+  modalImg.src = imageUrl;
+}
+
+// Close the modal
+function closeModal() {
+  const modal = document.getElementById("myModal");
+  modal.style.display = "none";
+}
 
 
 // page navigation variables
@@ -138,17 +181,43 @@ const pages = document.querySelectorAll("[data-page]");
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
+    const clickedLink = this.innerHTML.toLowerCase();
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
+    for (let j = 0; j < pages.length; j++) {
+      if (clickedLink === pages[j].dataset.page) {
+        pages[j].classList.add("active");
+        navigationLinks[j].classList.add("active");
         window.scrollTo(0, 0);
       } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
+        pages[j].classList.remove("active");
+        navigationLinks[j].classList.remove("active");
       }
     }
-
   });
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  const sections = document.querySelectorAll('main section:not(#about)');
+  sections.forEach(section => {
+    section.classList.add('hidden');
+  });
+
+  function showSection(sectionId) {
+    sections.forEach(section => {
+      if (section.id === sectionId) {
+        section.classList.remove('hidden');
+      } else {
+        section.classList.add('hidden');
+      }
+    });
+  }
+
+  const navLinks = document.querySelectorAll('nav a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      const sectionId = link.getAttribute('href').substring(1); // Get the section ID
+      showSection(sectionId);
+    });
+  });
+}); 
